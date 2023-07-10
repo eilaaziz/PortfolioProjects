@@ -18,7 +18,7 @@
 
 SELECT location,date,total_cases,total_deaths, (total_deaths/total_cases)*100 as DeathPercentage
 FROM PortfolioProject..CovidDeaths
-WHERE location like '%states%'
+WHERE location like '%Malaysia%'
 ORDER BY 1,2
 
 --looking at total Cases vs Population
@@ -26,7 +26,7 @@ ORDER BY 1,2
 
 SELECT location,date,Population,total_cases, (total_cases/population)*100 as PercentPopulationInfected
 FROM PortfolioProject..CovidDeaths
---WHERE location like '%states%'
+--WHERE location like '%Malaysia%'
 ORDER BY 1,2
 
 --Looking at Countries with Highest infection Rate compared to Population
@@ -34,7 +34,7 @@ ORDER BY 1,2
 SELECT location,Population,MAX(total_cases)AS HighestInfectionCount, MAX((total_cases/population))*100 
 as PercentPopulationInfected
 FROM PortfolioProject..CovidDeaths
---WHERE location like '%states%'
+--WHERE location like '%Malaysia%'
 GROUP BY location,Population
 ORDER BY PercentPopulationInfected desc
 
@@ -71,7 +71,7 @@ Where continent is not NULL
 --Group by date
 Order by 1,2
 
---join with both data covidDeaths and CovidVaccination (location and date)
+-- Join with both data covidDeaths and CovidVaccination (location and date)
 
 select *
 from PortfolioProject..CovidDeaths dea
@@ -79,7 +79,7 @@ JOIN PortfolioProject..CovidVaccinations vac
 	On dea.location = vac.location
 	AND dea.date = vac.date
 
---looking at total population vs vaccinations
+-- Looking at total population vs vaccinations
 --NOTE: we can use "CAST(attributes name as int) or "CONVERT(int,attribute name)"  nvarchar when we use aggregate function
 
 SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
